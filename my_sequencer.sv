@@ -1,5 +1,5 @@
 `ifndef MY_SEQUENCER__SV
-`define MY_SEQUENCER__SV /*sequence接受的?型?my_transaction*/
+`define MY_SEQUENCER__SV 
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
@@ -31,7 +31,7 @@ class my_sequence extends uvm_sequence #(my_transaction);
       super.new(name);
       
    endfunction
-	/*sequence??后?自??行?任?，生成transaction*/
+	/*sequence啟動後會自動運行該任務，生成transaction*/
    virtual task body();
    
         repeat (10) begin          

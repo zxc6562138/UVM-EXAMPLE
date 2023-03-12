@@ -78,9 +78,9 @@ end
 
 
     
-/*?driver，monitor的接口与??平台接口相?*/
-/*第一????父?，第二????第一???的相?路?*/
-/*?于在top中自?构建的?例，名字默??uvm_test_top*/
+/*將driver，monitor的接口與測試平台接口相連*/
+/*第一個參數為父類，第二個參數為第一個參數的相對路徑*/
+/*對於在top中自動構建的實例，名字默認為uvm_test_top*/
 initial begin
    uvm_config_db#(virtual my_if)::set(null, "uvm_test_top.env.i_agt.drv", "vif", intf);
    uvm_config_db#(virtual my_if)::set(null, "uvm_test_top.env.i_agt.mon", "vif", intf);
@@ -91,7 +91,7 @@ initial begin
 end
 
 initial begin
-   /*?命令?自?构建???例，uvm_test_top*/
+   /*該命令會自動構建測試實例，uvm_test_top*/
    run_test("base_test");
    
 end

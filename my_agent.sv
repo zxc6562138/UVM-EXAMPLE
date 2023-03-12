@@ -13,7 +13,7 @@ class my_agent extends uvm_agent ;
    my_sequencer  sqr;
    my_driver     drv;
    my_monitor    mon;
-   /*agent的端口，monitor与driver和外部通信的中?站*/
+   /*agent的端口，monitor與driver和外部通信的中繼站*/
    uvm_analysis_port #(my_transaction)  ap;
    
    function new(string name, uvm_component parent);
@@ -29,7 +29,7 @@ endclass
 
 function void my_agent::build_phase(uvm_phase phase);
    super.build_phase(phase);
-   /*?入端口?例化sequence和driver*/
+   /*輸入端口實例化sequence和driver*/
    if (get_is_active() == UVM_ACTIVE) begin
       sqr = my_sequencer::type_id::create("sqr", this);
       drv = my_driver::type_id::create("drv", this);
@@ -41,13 +41,13 @@ endfunction
 
 function void my_agent::connect_phase(uvm_phase phase);
    super.connect_phase(phase);
-   /*?driver端口与ap端口相?*/
+   /*將driver端口與ap端口相連*/
    if (get_is_active() == UVM_ACTIVE) begin
       drv.seq_item_port.connect(sqr.seq_item_export);
       
    end
    
-   /*?monitor端口与ap端口相?*/
+   /*將monitor端口與ap端口相連*/
      
      ap = mon.ap;
    

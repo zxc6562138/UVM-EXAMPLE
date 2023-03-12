@@ -25,20 +25,20 @@ class base_test extends uvm_test;
     //set a drain-time for the environment if desired
     phase.phase_done.set_drain_time(this, 50);
   endtask : run_phase  */
-   /*uvm中自建的一些phase函?或任?，?自?有序??*/
+   /*uvm中自建的一些phase函數或任務，會自動有序啟動*/
    extern virtual function void build_phase(uvm_phase phase);
    extern virtual function void report_phase(uvm_phase phase);
-   /*?component注?到factory中*/
+   /*將component註冊到factory中*/
    `uvm_component_utils(base_test)
 endclass
 
-/*?例化都在build phase中?行*/
+/*實例化都在build phase中進行*/
 function void base_test::build_phase(uvm_phase phase);
    super.build_phase(phase);
    
        
-   /*使用uvm的?例化方式，就能?利用factory机制*/
-   /*uvm利用?形?构?管理??平台的各??件*/
+   /*使用uvm的實例化方式，就能夠利用factory機制*/
+   
    env  =  my_env::type_id::create("env", this);
    
    seq = wr_rd_sequence::type_id::create("seq");
@@ -53,7 +53,7 @@ function void base_test::report_phase(uvm_phase phase);
 
    server = get_report_server();
    err_num = server.get_severity_count(UVM_ERROR);
-   //查看???平台的拓扑?构
+   //查看該驗證平台的拓樸結構
    uvm_top.print_topology();
 
    if (err_num != 0) begin

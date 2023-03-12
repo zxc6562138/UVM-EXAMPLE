@@ -12,7 +12,7 @@ import uvm_pkg::*;
   
 class my_driver extends uvm_driver#(my_transaction);
 
-	/*定??接口*/
+	/*定義虛接口*/
    virtual my_if vif; //to DUT
    
    `uvm_component_utils(my_driver)
@@ -41,12 +41,12 @@ task my_driver::main_phase(uvm_phase phase);
    while(1) begin
       //@(posedge vif.DRIVER.clk);
       //@(posedge vif.DRIVER.clk);
-       /*?取sequence*/
+       /*獲取sequence*/
       seq_item_port.get_next_item(req);
-       /*??到DUT*/
+       /*驅動到DUT*/
       drive_one_pkt(req);
       
-       /*???束*/
+       /*驅動結束*/
       seq_item_port.item_done();
    end
 endtask

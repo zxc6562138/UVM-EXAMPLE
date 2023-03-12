@@ -10,15 +10,15 @@ import uvm_pkg::*;
 `include "my_model.sv"
  
 class my_env extends uvm_env;
-/*里面通常包含agent，model，scoreboard*/
+/*裡面通常包含agent，model，scoreboard*/
    my_agent   i_agt;
    my_agent   o_agt;
    my_model   mdl;
    my_scoreboard scb;
    
-   /*建立fifo，用于agent-scoreboard通信（monitor??控?果??scoreboard）*/
-   /*agent-model通信（monitor??控?果??model）*/
-   /*model-scoreboard通信（比??果）*/
+   /*建立fifo，用於agent-scoreboard通信（monitor將監控結果發給scoreboard）*/
+   /*agent-model通信（monitor將監控結果發給model）*/
+   /*model-scoreboard通信（比較結果）*/
    uvm_tlm_analysis_fifo #(my_transaction) agt_scb_fifo;
    uvm_tlm_analysis_fifo #(my_transaction) agt_mdl_fifo;
    uvm_tlm_analysis_fifo #(my_transaction) mdl_scb_fifo;
@@ -31,8 +31,8 @@ class my_env extends uvm_env;
       super.build_phase(phase);
       i_agt = my_agent::type_id::create("i_agt", this);
       o_agt = my_agent::type_id::create("o_agt", this);
-      /*is_active?uvm_agent成??量*/
-      /*0，不?例化；1，?例化*/
+      /*is_active為uvm_agent成員變量*/
+      /*0，不實例化；1，實例化*/
       i_agt.is_active = UVM_ACTIVE;
       o_agt.is_active = UVM_PASSIVE;
       mdl = my_model::type_id::create("mdl", this);
@@ -51,7 +51,7 @@ class my_env extends uvm_env;
 endclass
 
 function void my_env::connect_phase(uvm_phase phase);
-   /*?接port在connect phase?行*/
+   /*連接port在connect phase進行*/
    super.connect_phase(phase);
    i_agt.ap.connect(agt_mdl_fifo.analysis_export);
    mdl.port.connect(agt_mdl_fifo.blocking_get_export);

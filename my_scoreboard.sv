@@ -8,9 +8,9 @@ import uvm_pkg::*;
 class my_scoreboard extends uvm_scoreboard;
     
     
-   /*期望值?列*/
+   /*期望值序列*/
    my_transaction  expect_queue[$];
-   /*接收monitor及model?据*/
+   /*接收monitor及model數據*/
    uvm_blocking_get_port #(my_transaction)  exp_port;
    uvm_blocking_get_port #(my_transaction)  act_port;
    
@@ -48,7 +48,7 @@ task my_scoreboard::main_phase(uvm_phase phase);
    fork 
       while(1) begin
       
-         /*?model接收*/
+         /*從model接收*/
          exp_port.get(get_expect);
          
          expect_queue.push_back(get_expect);
@@ -56,14 +56,14 @@ task my_scoreboard::main_phase(uvm_phase phase);
          
       end   
       while (1) begin       
-          /*?monitor接收*/
+          /*從monitor接收*/
          act_port.get(get_actual);
               
          wait(expect_queue.size() > 0);
          if(expect_queue.size() > 0) begin
                     
             tmp_tran = expect_queue.pop_front();
-             /*比??果*/
+             /*比較結果*/
             result = get_actual.compare(tmp_tran);
             
             if(result) begin 

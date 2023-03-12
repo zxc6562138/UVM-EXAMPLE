@@ -11,7 +11,7 @@ class my_monitor extends uvm_monitor;
    
    
    virtual my_if vif;
-	/*ºÝ¤f¡AÉOscoreboard¤Îmodel*/
+	/*ºÝ¤f*/
    uvm_analysis_port #(my_transaction)  ap;
    my_transaction tr;  
    `uvm_component_utils(my_monitor)

@@ -11,7 +11,7 @@ import uvm_pkg::*;
 class my_model extends uvm_component;
 
      
-   /*接收端口与?送端口，分?与monitor及scoreboard通信*/
+   /*接收端口與發送端口，分別與monitor及scoreboard通信*/
    uvm_blocking_get_port #(my_transaction)  port;
    uvm_analysis_port #(my_transaction)  ap;
    bit [7:0] sc_mem [4];
